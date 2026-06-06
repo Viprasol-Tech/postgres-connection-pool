@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "postgres-connection-pool"
+version = "0.1.0"
+description = "A generic connection pool (acquire/release, max size, timeout, health checks) — by Viprasol Tech."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Viprasol Tech Private Limited", email = "support@viprasol.com" }]
+keywords = [
+  "connection-pool",
+  "postgres",
+  "database",
+  "pooling",
+  "python",
+  "concurrency",
+  "performance",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Database",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = ["typer>=0.12", "rich>=13.7"]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.4", "mypy>=1.10", "pytest>=8.0", "pytest-cov>=5.0"]
+
+[project.scripts]
+postgres-connection-pool = "postgres_connection_pool.cli:app"
+
+[project.urls]
+Homepage = "https://viprasol.com"
+Repository = "https://github.com/Viprasol-Tech/postgres-connection-pool"
+Issues = "https://github.com/Viprasol-Tech/postgres-connection-pool/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/postgres_connection_pool"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF", "C4"]
+ignore = ["B008", "B027", "UP042"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
