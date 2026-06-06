@@ -20,3 +20,12 @@ class PoolTimeoutError(PoolError, TimeoutError):
 
 class PoolClosedError(PoolError):
     """Raised when an operation is attempted on a pool that has been closed."""
+
+
+class CircuitOpenError(PoolError):
+    """Raised when the circuit breaker is open and connection creation is blocked.
+
+    Inherits from :class:`PoolError`, so callers that already catch pool errors will
+    catch this too. Surfaces during :meth:`ConnectionPool.acquire` when repeated
+    connection failures have tripped the breaker into its fail-fast state.
+    """

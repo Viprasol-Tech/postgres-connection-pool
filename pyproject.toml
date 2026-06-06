@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "postgres-connection-pool"
-version = "0.1.0"
+version = "0.2.0"
 description = "A generic connection pool (acquire/release, max size, timeout, health checks) — by Viprasol Tech."
 readme = "README.md"
 requires-python = ">=3.11"
