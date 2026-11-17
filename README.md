@@ -69,13 +69,13 @@ breaker = CircuitBreaker(failure_threshold=5, reset_timeout=30.0)
 pool: ConnectionPool = ConnectionPool(
     factory=my_factory,
     max_size=10,
-    min_size=2,              # keep 2 connections warm (created eagerly)
-    timeout=5.0,             # seconds to wait when the pool is exhausted
+    min_size=2,  # keep 2 connections warm (created eagerly)
+    timeout=5.0,  # seconds to wait when the pool is exhausted
     health_check=ping_healthy,
-    max_lifetime=300.0,      # recycle connections older than 5 minutes
-    max_create_retries=3,    # retry transient connect failures
+    max_lifetime=300.0,  # recycle connections older than 5 minutes
+    max_create_retries=3,  # retry transient connect failures
     retry_backoff=0.2,
-    breaker=breaker,         # fail fast when the database is down
+    breaker=breaker,  # fail fast when the database is down
 )
 
 with pool.connection() as conn:
